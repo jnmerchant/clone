@@ -5,6 +5,11 @@ class MessagesController < ApplicationController
   def index
     @messages = Message.all
 
+    user_id = params[:user_id]
+    if not user_id.blank?
+      @messages = Message.where(user_id: user_id)
+    end
+
     paginate json: @messages
   end
 
