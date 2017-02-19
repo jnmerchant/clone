@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   # Include default devise modules.
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :trackable, :validatable
+          
   has_many :follower_relationships, foreign_key: :following_id, class_name: 'Follow'
   has_many :followers, through: :follower_relationships, source: :follower
 
@@ -11,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :messages
 
   include DeviseTokenAuth::Concerns::User
+  # include Filterable
 
   def follow(user_id)
     following_relationships.create(following_id: user_id)

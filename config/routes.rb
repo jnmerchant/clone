@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   post ':user_name/unfollow_user', to: 'relationships#unfollow_user', as: :unfollow_user
 
-  resources :users, except: [:destroy, :create]
+  resources :users, except: [:create]
   resources :messages
   mount_devise_token_auth_for 'User', at: 'auth'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
