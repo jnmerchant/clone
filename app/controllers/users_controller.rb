@@ -5,6 +5,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :user_id, :nickname, :email)
+    params.require(:user).permit(:name, :user_id, :nickname, :email, :message_ids [])
   end
 end
