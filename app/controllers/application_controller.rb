@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::API
   include DeviseTokenAuth::Concerns::SetUserByToken
+  include ActionController::Serialization
 
   before_action :update_sanitized_params, if: :devise_controller?
 
