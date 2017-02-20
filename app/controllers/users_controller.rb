@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :set_user, only: [:show, :destroy, :update]
 
   def index
-    @users = User.all
-
+    # @users = User.all
+    @users = User.filter(params.slice(:u_name, :nickname, :email))
     render json: @users
   end
 
@@ -30,6 +30,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:id, :name, :user_id, :nickname, :email, :image, :message_ids [])
+      params.require(:user).permit(:id, :name, :user_id, :nickname, :email, :image)
     end
 end

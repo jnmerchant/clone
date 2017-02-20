@@ -3,12 +3,13 @@ class MessagesController < ApplicationController
 
   # GET /messages
   def index
-    @messages = Message.all
+    # @messages = Message.all
+    @messages = Message.filter(params.slice(:text, :user_id))
 
-    user_id = params[:user_id]
-    if not user_id.blank?
-      @messages = Message.where(user_id: user_id)
-    end
+    # user_id = params[:user_id]
+    # if not user_id.blank?
+    #   @messages = Message.where(user_id: user_id)
+    # end
 
     paginate json: @messages
   end

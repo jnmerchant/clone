@@ -11,8 +11,13 @@ class User < ActiveRecord::Base
 
   has_many :messages, dependent: :destroy
 
+  include Filterable
+
+  scope :u_name, -> (u_name) { where("name ILIKE ?", "%#{u_name}%") }
+  scope :nickname, -> (nickname) { where("nickname ILIKE ?", "%#{nickname}%") }
+  scope :email, -> (email) { where("email ILIKE ?", "%#{email}%") }
+
   include DeviseTokenAuth::Concerns::User
-  # include Filterable
 
   def follow(user_id)
     following_relationships.create(following_id: user_id)
